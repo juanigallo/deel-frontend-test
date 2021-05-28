@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { debounce } from "../../utils/debounce";
 import Input from "../Input";
 import Result from "../Result";
 import "./style.css";
@@ -8,12 +9,22 @@ class Autocomplete extends Component {
     inputValue: ""
   };
 
-  handleInputChange(event) {
-    const { value } = event.target.value;
-    this.setState({
-      inputValue: value
-    });
-  }
+  handleSearch = debounce((val) => {
+    console.log("test", val);
+  });
+
+  handleInputChange = (event) => {
+    const { value } = event.target;
+
+    this.setState(
+      {
+        inputValue: value
+      },
+      () => {
+        this.handleSearch(value);
+      }
+    );
+  };
 
   render() {
     const { inputValue } = this.state;
@@ -31,21 +42,3 @@ class Autocomplete extends Component {
 }
 
 export default Autocomplete;
-
-// import React, { useEffect, useState } from "react";
-
-// export const useDebounce = (value, delay) => {
-//   const [debouncedValue, setDebouncedValue] = useState(value);
-
-//   useEffect(() => {
-//     const handler = setTimeout(() => {
-//       setDebouncedValue(value);
-//     }, delay);
-
-//     return () => {
-//       clearTimeout(handler);
-//     };
-//   }, [value, delay]);
-
-//   return debouncedValue;
-// };
