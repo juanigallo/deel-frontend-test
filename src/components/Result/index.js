@@ -1,0 +1,35 @@
+import { Component } from "react";
+import Item from "../Item";
+import Loader from "../Loader";
+import "./style.css";
+
+class Result extends Component {
+  render() {
+    const { value, isLoading } = this.props;
+    return (
+      <>
+        {isLoading ? (
+          <div className="loading-container">
+            <Loader label="Loading" />
+          </div>
+        ) : (
+          <>
+            {value?.length > 0 ? (
+              <ul className="result-container">
+                {value?.map((result, key) => {
+                  return <Item key={key} value={result} />;
+                })}
+              </ul>
+            ) : (
+              <div className="loading-container">
+                <p>There were no results for this search</p>
+              </div>
+            )}
+          </>
+        )}
+      </>
+    );
+  }
+}
+
+export default Result;

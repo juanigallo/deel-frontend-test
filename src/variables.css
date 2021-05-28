@@ -1,0 +1,23 @@
+:root {
+  /* Spacing unit */
+  --smallUnit: 4px;
+  --u: 8px;
+  --u2: 16px;
+  --u3: 24px;
+  --u4: 32px;
+  --u5: 40px;
+  --u6: 48px;
+  --u7: 56px;
+  --u8: 64px;
+
+  /* Colors */
+  --white: #fff;
+  --black: #01090f;
+  --border-color: #e8ebf2;
+  --gray: #f4f3f6;
+  --gray-2: #9da3a8;
+  --blue: #2c71f0;
+
+  /* Effects */
+  --shadow: 0 2px 8px 1px rgb(64 60 67 / 24%);
+}

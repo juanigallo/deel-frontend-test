@@ -1,0 +1,7 @@
+.icon {
+  width: var(--u3);
+}
+
+.pointer {
+  cursor: pointer;
+}

@@ -1,0 +1,19 @@
+.input-container {
+  display: flex;
+  border: 1px solid var(--gray-2);
+  border-radius: var(--smallUnit);
+  overflow: hidden;
+  padding: 0 10px;
+}
+
+.input-container .input {
+  border: none;
+  width: 100%;
+  height: var(--u5);
+  outline: none;
+}
+
+/* https://caniuse.com/css-focus-within not available on ie < 11 */
+.input-container:focus-within {
+  box-shadow: var(--shadow);
+}

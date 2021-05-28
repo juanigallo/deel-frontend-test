@@ -1,0 +1,11 @@
+.item {
+  height: var(--u5);
+  padding: var(--u3);
+  display: flex;
+  align-items: center;
+}
+
+.item:hover {
+  background-color: var(--gray);
+  cursor: pointer;
+}

@@ -1,0 +1,20 @@
+.result-container {
+  width: 100%;
+  margin: 0;
+  padding: var(--u) 0px;
+  list-style: none;
+  border: 1px solid var(--gray-2);
+  border-top: none;
+  border-radius: 0 0 var(--smallUnit) var(--smallUnit);
+}
+
+.loading-container {
+  width: 100%;
+  margin: 0;
+  padding: var(--u) 0px var(--u) var(--u);
+  list-style: none;
+  border: 1px solid var(--gray-2);
+  border-top: none;
+  border-radius: 0 0 var(--smallUnit) var(--smallUnit);
+  cursor: default;
+}
