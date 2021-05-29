@@ -15,7 +15,7 @@ class App extends Component {
             data={mockedData}
             keysToSearch={["name", "surname"]}
             keysToShow={["name", "surname"]}
-            apiUrl="http://64.227.26.24:3010/api/search?q="
+            apiUrl="https://deel.juanigallo.com/api/search?q="
           />
         </section>
       </>
