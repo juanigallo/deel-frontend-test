@@ -23,3 +23,14 @@ This repo has an autocomplete component with the following features.
 - main -> React with classes, using create-react-app
 - functional -> React with functional components, using create-react-app
 - webpack-babel -> React with classes. No kickoff dependencies.
+
+## Demo
+
+https://deel-frontend-test.vercel.app/
+
+## Run the project
+
+- Clone the repo
+- Run `npm install` or `yarn install`
+- Development mode: Run `npm start` or `yarn start`
+- Production build: Run `npm run build`
