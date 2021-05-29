@@ -13,42 +13,50 @@ class Autocomplete extends Component {
   };
 
   // Fetch data from external source. Not applying any filtering in here
-  handleSearch = debounce(async (val) => {
-    const { apiUrl } = this.props;
-    try {
-      const data = await fetcher(`${apiUrl}${val}`);
+  handleSearch = debounce(
+    async (val) => {
+      const { apiUrl } = this.props;
+      try {
+        const data = await fetcher(`${apiUrl}${val}`);
 
-      this.setState({
-        result: [...this.state.result, ...data],
-        isLoading: false
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  }, this.props.debounceTime ?? 300);
+        this.setState({
+          result: [...this.state.result, ...data],
+          isLoading: false
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    this.props.debounceTime ?? 300,
+    true
+  );
 
   // Data from internal source. This function filters the data.
-  filterLocalData = debounce((data, searchValue) => {
-    const { keysToSearch } = this.props;
-    if (!keysToSearch || keysToSearch.length == 0) return [];
+  filterLocalData = debounce(
+    (data, searchValue) => {
+      const { keysToSearch } = this.props;
+      if (!keysToSearch || keysToSearch.length == 0) return [];
 
-    const normalizedSearchValue = this.normalizeValue(searchValue);
+      const normalizedSearchValue = this.normalizeValue(searchValue);
 
-    const result = data.filter((unique) => {
-      const joinedSearch = keysToSearch
-        .map((key) => {
-          return this.normalizeValue(unique[key]);
-        })
-        .join(" ");
+      const result = data.filter((unique) => {
+        const joinedSearch = keysToSearch
+          .map((key) => {
+            return this.normalizeValue(unique[key]);
+          })
+          .join(" ");
 
-      return joinedSearch.includes(normalizedSearchValue);
-    });
+        return joinedSearch.includes(normalizedSearchValue);
+      });
 
-    this.setState({
-      result: [...this.state.result, ...result],
-      isLoading: false
-    });
-  });
+      this.setState({
+        result: [...this.state.result, ...result],
+        isLoading: false
+      });
+    },
+    this.props.debounceTime ?? 300,
+    false
+  );
 
   normalizeValue = (val) => {
     return val.toLowerCase();
