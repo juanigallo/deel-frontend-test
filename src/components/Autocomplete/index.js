@@ -31,13 +31,22 @@ function Autocomplete({
     }
   }, [debouncedInputValue]);
 
+  useEffect(() => {
+    if (result.length != 0) {
+      setIsLoading(false);
+    }
+  }, [result]);
+
   // Fetch data from external source. Not applying any filtering in here
   const handleSearch = async (val) => {
     try {
       const data = await fetcher(`${apiUrl}${val}`);
 
       setResult((prevState) => [...prevState, ...data]);
-      setIsLoading(false);
+
+      if (data?.length == 0 && result?.length == 0) {
+        setIsLoading(false);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -60,7 +69,9 @@ function Autocomplete({
     });
 
     setResult((prevState) => [...prevState, ...filteredResult]);
-    setIsLoading(false);
+    if (filteredResult?.length == 0 && result?.length) {
+      setIsLoading(false);
+    }
   };
 
   const normalizeValue = (val) => {
