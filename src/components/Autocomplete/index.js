@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { debounce } from "utils/debounce";
-import { fetcher } from "utils/fetcher";
-import Input from "components/Input";
-import Result from "components/Result";
+import { debounce } from "../../utils/debounce";
+import { fetcher } from "../../utils/fetcher";
+import Input from "../Input";
+import Result from "../Result";
 import "./style.css";
 
 class Autocomplete extends Component {

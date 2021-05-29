@@ -1,31 +1,43 @@
 {
   "name": "deel-frontend-test",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3"
-  },
+  "version": "1.0.0",
+  "description": "This repo has an autocomplete component with the following features.",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "start": "webpack serve --mode development"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanigallo/deel-frontend-test.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juanigallo/deel-frontend-test/issues"
+  },
+  "homepage": "https://github.com/juanigallo/deel-frontend-test#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-transform-runtime": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "style-loader": "^2.0.0",
+    "svg-url-loader": "^7.1.1",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.14.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

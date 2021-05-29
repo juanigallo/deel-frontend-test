@@ -1,7 +1,7 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import "./App.css";
-import Autocomplete from "components/Autocomplete";
-import mockedData from "data/mocked.json";
+import Autocomplete from "./components/Autocomplete";
+import mockedData from "./data/mocked.json";
 
 class App extends Component {
   render() {

@@ -1,5 +1,5 @@
-import { Component } from "react";
-import Icon from "components/Icon";
+import React, { Component } from "react";
+import Icon from "../Icon";
 import "./style.css";
 
 class Input extends Component {

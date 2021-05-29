@@ -1,6 +1,6 @@
-import { Component } from "react";
-import Item from "components/Item";
-import Loader from "components/Loader";
+import React, { Component } from "react";
+import Item from "../Item";
+import Loader from "../Loader";
 import "./style.css";
 
 class Result extends Component {
