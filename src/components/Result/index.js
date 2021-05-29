@@ -4,8 +4,22 @@ import Loader from "components/Loader";
 import "./style.css";
 
 class Result extends Component {
+  formatItem = (itemData) => {
+    const { keysToShow } = this.props;
+
+    return keysToShow
+      .reduce((result, elem) => {
+        if (itemData[elem]) {
+          result.push(itemData[elem]);
+        }
+
+        return result;
+      }, [])
+      .join(" ");
+  };
+
   render() {
-    const { value, isLoading } = this.props;
+    const { value, isLoading, inputValue } = this.props;
     return (
       <>
         {isLoading ? (
@@ -17,7 +31,13 @@ class Result extends Component {
             {value?.length > 0 ? (
               <ul className="result-container">
                 {value?.map((result, key) => {
-                  return <Item key={key} value={result} />;
+                  return (
+                    <Item
+                      key={key}
+                      value={this.formatItem(result)}
+                      inputValue={inputValue}
+                    />
+                  );
                 })}
               </ul>
             ) : (

@@ -9,3 +9,10 @@
   background-color: var(--gray);
   cursor: pointer;
 }
+
+.highlight {
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: var(--smallUnit);
+  padding: 0 5px;
+}
