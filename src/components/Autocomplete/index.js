@@ -1,104 +1,98 @@
-import React, { Component } from "react";
-import { debounce } from "utils/debounce";
+import { useState, useEffect } from "react";
+import { useDebounce } from "hooks/useDebounce";
 import { fetcher } from "utils/fetcher";
 import Input from "components/Input";
 import Result from "components/Result";
 import "./style.css";
 
-class Autocomplete extends Component {
-  state = {
-    inputValue: "",
-    result: [],
-    isLoading: false
-  };
+function Autocomplete({
+  placeholder,
+  icon,
+  keysToShow,
+  apiUrl,
+  debounceTime,
+  keysToSearch,
+  data
+}) {
+  const [inputValue, setInputValue] = useState("");
+  const [result, setResult] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const debouncedInputValue = useDebounce(inputValue, debounceTime ?? 300);
+
+  useEffect(() => {
+    if (inputValue != "") {
+      if (data) {
+        filterLocalData(data, inputValue);
+      }
+      if (apiUrl) {
+        handleSearch(inputValue);
+      }
+    }
+  }, [debouncedInputValue]);
 
   // Fetch data from external source. Not applying any filtering in here
-  handleSearch = debounce(async (val) => {
-    const { apiUrl } = this.props;
+  const handleSearch = async (val) => {
     try {
       const data = await fetcher(`${apiUrl}${val}`);
 
-      this.setState({
-        result: [...this.state.result, ...data],
-        isLoading: false
-      });
+      setResult((prevState) => [...prevState, ...data]);
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
-  }, this.props.debounceTime ?? 300);
+  };
 
   // Data from internal source. This function filters the data.
-  filterLocalData = debounce((data, searchValue) => {
-    const { keysToSearch } = this.props;
+  const filterLocalData = (data, searchValue) => {
     if (!keysToSearch || keysToSearch.length == 0) return [];
 
-    const normalizedSearchValue = this.normalizeValue(searchValue);
+    const normalizedSearchValue = normalizeValue(searchValue);
 
-    const result = data.filter((unique) => {
+    const filteredResult = data.filter((unique) => {
       const joinedSearch = keysToSearch
         .map((key) => {
-          return this.normalizeValue(unique[key]);
+          return normalizeValue(unique[key]);
         })
         .join(" ");
 
       return joinedSearch.includes(normalizedSearchValue);
     });
 
-    this.setState({
-      result: [...this.state.result, ...result],
-      isLoading: false
-    });
-  });
+    setResult((prevState) => [...prevState, ...filteredResult]);
+    setIsLoading(false);
+  };
 
-  normalizeValue = (val) => {
+  const normalizeValue = (val) => {
     return val.toLowerCase();
   };
 
-  handleInputChange = (event) => {
+  const handleInputChange = (event) => {
     const { value } = event.target;
 
-    this.setState(
-      {
-        inputValue: value,
-        isLoading: true,
-        result: []
-      },
-      () => {
-        const { data, apiUrl } = this.props;
-        if (value != "") {
-          if (data) {
-            this.filterLocalData(data, value);
-          }
-          if (apiUrl) {
-            this.handleSearch(value);
-          }
-        }
-      }
-    );
+    setInputValue(value);
+    setIsLoading(true);
+    setResult([]);
   };
 
-  render() {
-    const { inputValue, result, isLoading } = this.state;
-    const { placeholder, icon, keysToShow } = this.props;
-    return (
-      <div className="autocomplete-container">
-        <Input
-          value={inputValue}
-          onChange={(e) => this.handleInputChange(e)}
-          placeholder={placeholder}
-          icon={icon}
+  return (
+    <div className="autocomplete-container">
+      <Input
+        value={inputValue}
+        onChange={handleInputChange}
+        placeholder={placeholder}
+        icon={icon}
+      />
+      {inputValue != "" && (
+        <Result
+          value={result}
+          isLoading={isLoading}
+          keysToShow={keysToShow}
+          inputValue={inputValue}
         />
-        {inputValue != "" && (
-          <Result
-            value={result}
-            isLoading={isLoading}
-            keysToShow={keysToShow}
-            inputValue={inputValue}
-          />
-        )}
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 }
 
 export default Autocomplete;

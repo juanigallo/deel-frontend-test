@@ -1,8 +1,7 @@
-import { Component } from "react";
 import "./style.css";
 
-class Item extends Component {
-  highlightText = (text, highlight) => {
+function Item({ value, inputValue }) {
+  const highlightText = (text, highlight) => {
     const parts = text.split(new RegExp(`(${highlight})`, "gi"));
     return (
       <span>
@@ -20,10 +19,7 @@ class Item extends Component {
     );
   };
 
-  render() {
-    const { value, inputValue } = this.props;
-    return <li className="item">{this.highlightText(value, inputValue)}</li>;
-  }
+  return <li className="item">{highlightText(value, inputValue)}</li>;
 }
 
 export default Item;
