@@ -1,4 +1,5 @@
 .autocomplete-container {
   width: 400px;
+  max-width: 90%;
   padding: var(--u3) 0;
 }
