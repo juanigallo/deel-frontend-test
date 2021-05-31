@@ -1,5 +1,6 @@
 .container {
   width: 500px;
+  max-width: 90%;
   margin: var(--u3) auto;
   background-color: var(--white);
   border-radius: var(--u);
